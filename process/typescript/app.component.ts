@@ -1,22 +1,30 @@
 import {Component} from 'angular2/core';
+import {CrewMemberService} from './crewmembers.service';
 
-interface CrewMemberInfo{
-  id:string;
-  preference:string;
-
-}
 
 
 @Component({
   selector: 'crewmemberData',
   templateUrl: 'partials/app.html',
+  providers:[CrewMemberService],
   styleUrls: ['css/app.css']
 })
 
 export class AppComponent {
 
-  info=CREWMEMBERS_INFO;
+  info=null;
   preferenceFound=null;
+
+
+  constructor(private crewmemberService:CrewMemberService){
+    this.ngOnInit();
+
+  }
+  ngOnInit(){
+    this.info = this.crewmemberService.get();
+    console.log(this.info);
+  }
+
 
   //crewmemberID:string;
   //preference:string;
@@ -40,7 +48,3 @@ export class AppComponent {
   }
 
 }
-
-var CREWMEMBERS_INFO:CrewMemberInfo[]=   [
-   { "id" : "a3", "preference" : "Red" }, { "id" : "a1", "preference" : "Blue" }, { "id" : "a4", "preference" : "Green" }, { "id" : "a2", "preference" : "Yellow" }
- ]
