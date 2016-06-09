@@ -4,6 +4,7 @@ import {CrewmemberResults} from './crewmember-results.component';
 
 
 
+
 @Component({
   selector: 'crewmemberData',
   templateUrl: 'partials/app.html',
@@ -20,9 +21,12 @@ export class AppComponent {
 
 
   constructor(private crewmemberService:CrewMemberService){
-    this.info = this.crewmemberService.get();
-    console.log(this.info);
-
+    this.crewmemberService.get()
+                     .subscribe(
+                       info =>{
+                         this.info=info;
+                       },
+                       error =>  console.log(error));
   }
 
 
@@ -35,7 +39,10 @@ export class AppComponent {
     console.log(this.info[i].preference)
     return this.info[i].preference;
   }
-  }
+}
   }
 
 }
+
+
+//bootstrap(AppComponent, [ HTTP_PROVIDERS ]);
