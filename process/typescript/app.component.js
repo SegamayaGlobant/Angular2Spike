@@ -24,7 +24,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'crewmemberData',
-                        template: '<h1>COMO VAMOS</h1>'
+                        templateUrl: 'partials/app.html',
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
