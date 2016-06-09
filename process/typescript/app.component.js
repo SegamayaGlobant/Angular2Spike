@@ -23,15 +23,15 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
         execute: function() {
             AppComponent = (function () {
                 function AppComponent(crewmemberService) {
+                    var _this = this;
                     this.crewmemberService = crewmemberService;
                     this.info = null;
                     this.preferenceFound = null;
-                    this.ngOnInit();
+                    this.crewmemberService.get()
+                        .subscribe(function (info) {
+                        _this.info = info;
+                    }, function (error) { return console.log(error); });
                 }
-                AppComponent.prototype.ngOnInit = function () {
-                    this.info = this.crewmemberService.get();
-                    console.log(this.info);
-                };
                 //crewmemberID:string;
                 //preference:string;
                 /*
@@ -64,4 +64,5 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
         }
     }
 });
+//bootstrap(AppComponent, [ HTTP_PROVIDERS ]);
 //# sourceMappingURL=app.component.js.map
