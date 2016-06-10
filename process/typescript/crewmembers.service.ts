@@ -3,17 +3,18 @@ import { Http, Response } from 'angular2/http';
 import { Injectable }     from 'angular2/core';
 import './rxjs-operators';
 import { Observable }     from 'rxjs/Observable';
+import {CrewMemberInfo}     from './crewmember-info';
 
 @Injectable()
 export class CrewMemberService{
   constructor (private http: Http) {}
     private crewurl = 'http://localhost:8094/create';  // URL to web API
+    CREWMEMBERS_INFO: CrewMemberInfo[]= null;
 
     private extractData(res: Response) {
       let body = res.json();
-      console.log(body);
       this.CREWMEMBERS_INFO=body;
-      return body;
+      return this.CREWMEMBERS_INFO;
     }
     private handleError (error: any) {
       // In a real world app, we might use a remote logging infrastructure
@@ -36,19 +37,5 @@ export class CrewMemberService{
     if(index>=0){
       this.CREWMEMBERS_INFO.splice(index,1);
     }
-
   }
-
-
-   CREWMEMBERS_INFO: CrewMemberInfo[]=  [
-    { "id" : "a3", "preference" : "Red" }, { "id" : "a1", "preference" : "Blue" }, { "id" : "a4", "preference" : "Green" }, { "id" : "a2", "preference" : "Hola" }
-  ];
-
-
-}
-
-interface CrewMemberInfo{
-  id:string;
-  preference:string;
-
 }

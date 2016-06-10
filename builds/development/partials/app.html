@@ -1,13 +1,9 @@
 <div class="artistsearch">
   <div class="card search">
     <h1>Crew Member Preferences</h1>
-    <h3>Please insert a crewmemberID to check its preferences</h3>
-    <label>{{id}}</label>
-    <label>{{preference}}</label>
-    <input #newPreference>
+    <h3>Insert a crewmemberID to check its preferences</h3>
+    <input #newPreference >
     <button class="btn" (click)="sendId(newPreference.value)">Find</button>
   </div>
-  <label *ngIf="preferenceFound">perrito</label>
-
-  <crewmember-Results-Pref [crResult]="prueba">Something´s Wrong :( )</crewmember-Results-Pref>
+  <crewmember-Results-Pref [crResult]="objectFound" *ngIf="activeSearch">Something´s Wrong :( )</crewmember-Results-Pref>
 </div>

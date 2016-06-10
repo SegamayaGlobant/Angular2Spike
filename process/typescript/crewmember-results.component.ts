@@ -1,4 +1,5 @@
 import {Component,Input} from 'angular2/core';
+import {CrewMemberInfo} from './crewmember-info';
 
 @Component({
   selector: 'crewmember-Results-Pref',
@@ -8,11 +9,6 @@ import {Component,Input} from 'angular2/core';
 
 export class CrewmemberResults{
 
-  @Input() crResult;
-
-
-
-
-
+  @Input() crResult:CrewMemberInfo;
 
 }

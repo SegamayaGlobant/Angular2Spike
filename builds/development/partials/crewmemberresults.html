@@ -1,4 +1,13 @@
 <div class="card search" >
   <h1>Results</h1>
-  <label>{{crResult}}</label>
+  <br>
+  <div *ngIf="crResult">
+    <h2>ID:{{crResult.id |uppercase}} </h2>
+    <br>
+    <h2>Preference: {{crResult.preference |uppercase}} </h2>
+  </div>
+  <div *ngIf="!crResult">
+    <h2>No Data Found!!! </h2>
+  </div>
+
 </div >

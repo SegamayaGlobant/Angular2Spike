@@ -29,15 +29,12 @@ System.register(['angular2/http', 'angular2/core', './rxjs-operators', 'rxjs/Obs
                 function CrewMemberService(http) {
                     this.http = http;
                     this.crewurl = 'http://localhost:8094/create'; // URL to web API
-                    this.CREWMEMBERS_INFO = [
-                        { "id": "a3", "preference": "Red" }, { "id": "a1", "preference": "Blue" }, { "id": "a4", "preference": "Green" }, { "id": "a2", "preference": "Hola" }
-                    ];
+                    this.CREWMEMBERS_INFO = null;
                 }
                 CrewMemberService.prototype.extractData = function (res) {
                     var body = res.json();
-                    console.log(body);
                     this.CREWMEMBERS_INFO = body;
-                    return body;
+                    return this.CREWMEMBERS_INFO;
                 };
                 CrewMemberService.prototype.handleError = function (error) {
                     // In a real world app, we might use a remote logging infrastructure

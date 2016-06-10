@@ -1,4 +1,4 @@
-System.register(['angular2/core', './crewmembers.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './crewmembers.service', './crewmember-results.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, crewmembers_service_1;
+    var core_1, crewmembers_service_1, crewmember_results_component_1;
     var AppComponent;
     return {
         setters:[
@@ -19,32 +19,29 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
             },
             function (crewmembers_service_1_1) {
                 crewmembers_service_1 = crewmembers_service_1_1;
+            },
+            function (crewmember_results_component_1_1) {
+                crewmember_results_component_1 = crewmember_results_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent(crewmemberService) {
                     var _this = this;
                     this.crewmemberService = crewmemberService;
-                    this.info = null;
-                    this.preferenceFound = null;
+                    this.objectFound = null;
+                    this.activeSearch = false;
                     this.crewmemberService.get()
                         .subscribe(function (info) {
                         _this.info = info;
                     }, function (error) { return console.log(error); });
                 }
-                //crewmemberID:string;
-                //preference:string;
-                /*
-                  constructor(){
-                    this.crewmemberID='a1';
-                    this.preference='Blue';
-                  }
-                */
                 AppComponent.prototype.sendId = function (preferenceID) {
-                    console.log(preferenceID);
+                    this.objectFound = null;
+                    this.activeSearch = true;
                     for (var i = 0; i < this.info.length; i++) {
                         if (this.info[i].id == preferenceID) {
-                            console.log(this.info[i].preference);
+                            this.objectFound = this.info[i];
+                            console.log(this.objectFound);
                             return this.info[i].preference;
                         }
                     }
@@ -53,6 +50,7 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
                     core_1.Component({
                         selector: 'crewmemberData',
                         templateUrl: 'partials/app.html',
+                        directives: [crewmember_results_component_1.CrewmemberResults],
                         providers: [crewmembers_service_1.CrewMemberService],
                         styleUrls: ['css/app.css']
                     }), 
@@ -64,5 +62,4 @@ System.register(['angular2/core', './crewmembers.service'], function(exports_1, 
         }
     }
 });
-//bootstrap(AppComponent, [ HTTP_PROVIDERS ]);
 //# sourceMappingURL=app.component.js.map
