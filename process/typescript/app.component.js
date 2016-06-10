@@ -26,25 +26,17 @@ System.register(['angular2/core', './crewmembers.service', './crewmember-results
         execute: function() {
             AppComponent = (function () {
                 function AppComponent(crewmemberService) {
-                    var _this = this;
                     this.crewmemberService = crewmemberService;
                     this.objectFound = null;
                     this.activeSearch = false;
-                    this.crewmemberService.get()
-                        .subscribe(function (info) {
-                        _this.info = info;
-                    }, function (error) { return console.log(error); });
                 }
                 AppComponent.prototype.sendId = function (preferenceID) {
-                    this.objectFound = null;
+                    var _this = this;
                     this.activeSearch = true;
-                    for (var i = 0; i < this.info.length; i++) {
-                        if (this.info[i].id == preferenceID) {
-                            this.objectFound = this.info[i];
-                            console.log(this.objectFound);
-                            return this.info[i].preference;
-                        }
-                    }
+                    this.crewmemberService.get(preferenceID)
+                        .subscribe(function (info) {
+                        _this.objectFound = info;
+                    }, function (error) { return console.log(error); });
                 };
                 AppComponent = __decorate([
                     core_1.Component({

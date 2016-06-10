@@ -28,13 +28,11 @@ System.register(['angular2/http', 'angular2/core', './rxjs-operators', 'rxjs/Obs
             CrewMemberService = (function () {
                 function CrewMemberService(http) {
                     this.http = http;
-                    this.crewurl = 'http://localhost:8094/create'; // URL to web API
-                    this.CREWMEMBERS_INFO = null;
+                    this.crewurl = 'http://localhost:8094/getCrewMember'; // URL to web API
                 }
                 CrewMemberService.prototype.extractData = function (res) {
                     var body = res.json();
-                    this.CREWMEMBERS_INFO = body;
-                    return this.CREWMEMBERS_INFO;
+                    return body;
                 };
                 CrewMemberService.prototype.handleError = function (error) {
                     // In a real world app, we might use a remote logging infrastructure
@@ -44,19 +42,13 @@ System.register(['angular2/http', 'angular2/core', './rxjs-operators', 'rxjs/Obs
                     console.error(errMsg); // log to console instead
                     return Observable_1.Observable.throw(errMsg);
                 };
-                CrewMemberService.prototype.get = function () {
-                    return this.http.get(this.crewurl)
+                CrewMemberService.prototype.get = function (preferenceID) {
+                    var search = new http_1.URLSearchParams();
+                    search.set('search', preferenceID);
+                    search.set('format', 'json');
+                    return this.http.get(this.crewurl, { search: search })
                         .map(this.extractData)
                         .catch(this.handleError);
-                };
-                CrewMemberService.prototype.add = function (newInfo) {
-                    this.CREWMEMBERS_INFO.push(newInfo);
-                };
-                CrewMemberService.prototype.delete = function (newInfo) {
-                    var index = this.CREWMEMBERS_INFO.indexOf(newInfo);
-                    if (index >= 0) {
-                        this.CREWMEMBERS_INFO.splice(index, 1);
-                    }
                 };
                 CrewMemberService = __decorate([
                     core_1.Injectable(), 
